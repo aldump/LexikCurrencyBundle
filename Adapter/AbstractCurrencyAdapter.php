@@ -127,5 +127,5 @@ abstract class AbstractCurrencyAdapter extends \ArrayIterator
      *
      * @return string
      */
-    abstract protected function getIdentifier();
+    abstract public function getIdentifier();
 }

@@ -2,7 +2,8 @@
 
 namespace Lexik\Bundle\CurrencyBundle\Twig\Extension;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Lexik\Bundle\CurrencyBundle\Currency\ConverterInterface;
+use Lexik\Bundle\CurrencyBundle\Currency\FormatterInterface;
 
 /**
  * Twig extension to format and convert currencies from templates.
@@ -13,18 +14,25 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class CurrencyExtension extends \Twig_Extension
 {
     /**
-     * @var ContainerInterface
+     * @var ConverterInterface
      */
-    protected $container;
+    private $converter;
+
+    /**
+     * @var FormatterInterface
+     */
+    private $formatter;
 
     /**
      * Construct.
      *
-     * @param ContainerInterface $container  We need the entire container to lazy load the Converter
+     * @param FormatterInterface $formatter
+     * @param ConverterInterface $converter
      */
-    public function __construct(ContainerInterface $container)
+    public function __construct(FormatterInterface $formatter, ConverterInterface $converter)
     {
-        $this->container = $container;
+        $this->formatter = $formatter;
+        $this->converter = $converter;
     }
 
     /**
@@ -44,7 +52,7 @@ class CurrencyExtension extends \Twig_Extension
      */
     public function getConverter()
     {
-        return $this->container->get('lexik_currency.converter');
+        return $this->converter;
     }
 
     /**
@@ -52,7 +60,7 @@ class CurrencyExtension extends \Twig_Extension
      */
     public function getFormatter()
     {
-        return $this->container->get('lexik_currency.formatter');
+        return $this->formatter;
     }
 
     /**
