@@ -15,7 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @author Cédric Girard <c.girard@lexik.fr>
  * @author Yoann Aparici <y.aparici@lexik.fr>
  */
-class ImportCurrencyCommand extends Comand
+class ImportCurrencyCommand extends Command
 {
     /**
      * @var ManagerRegistry
